@@ -1,25 +1,14 @@
 // App.js
-import { Network, TatumSDK, Ethereum } from "@tatumio/tatum";
-import React, { useState } from "react";
+import { useState } from "react";
+import * as ethereum from "../../lib/ethereum";
 
 function Form() {
   const [inputValue, setInputValue] = useState(""); // State to hold the input value
   const [labelText, setLabelText] = useState(""); // State to hold the label text
 
   const handleButtonClick = async () => {
-    const tatum = await TatumSDK.init<Ethereum>({
-      network: Network.ETHEREUM,
-      apiKey: { v4: "TATUM_API_KEY" },
-      verbose: true,
-    });
-    const balance = await tatum.address.getBalance({
-      addresses: [inputValue],
-    });
-    const balanceData = balance.data.filter(
-      (asset) => asset.asset === "ETH",
-    )[0];
-
-    setLabelText(`Balance: ${balanceData.balance}`);
+    const balance = await ethereum.getBalance(inputValue);
+    setLabelText(`Balance: ${balance}`);
   };
 
   return (
