@@ -16,7 +16,7 @@ function Form() {
       addresses: [inputValue],
     });
     const balanceData = balance.data.filter(
-      (asset) => asset.asset === "ETH"
+      (asset) => asset.asset === "ETH",
     )[0];
 
     setLabelText(`Balance: ${balanceData.balance}`);

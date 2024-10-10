@@ -1,15 +1,15 @@
-import preactLogo from '../../assets/tatum.jpeg'
-import Form from './form';
-import './style.css';
+import preactLogo from "../../assets/tatum.jpeg";
+import Form from "./form";
+import "./style.css";
 
 export function Home() {
-	return (
-		<div class="home">
-			<a href="https://preactjs.com" target="_blank">
-				<img src={preactLogo} alt="Preact logo" height="160" width="160" />
-			</a>
-			<h1>Tatum Hello</h1>
-			{/* <section>
+  return (
+    <div class="home">
+      <a href="https://preactjs.com" target="_blank">
+        <img src={preactLogo} alt="Preact logo" height="160" width="160" />
+      </a>
+      <h1>Tatum Hello</h1>
+      {/* <section>
 				<Resource
 					title="Learn Preact"
 					description="If you're new to Preact, try the interactive tutorial to learn important concepts"
@@ -26,16 +26,16 @@ export function Home() {
 					href="https://vitejs.dev"
 				/>
 			</section> */}
-			<Form />
-		</div>
-	);
+      <Form />
+    </div>
+  );
 }
 
 function Resource(props) {
-	return (
-		<a href={props.href} target="_blank" class="resource">
-			<h2>{props.title}</h2>
-			<p>{props.description}</p>
-		</a>
-	);
+  return (
+    <a href={props.href} target="_blank" class="resource">
+      <h2>{props.title}</h2>
+      <p>{props.description}</p>
+    </a>
+  );
 }
