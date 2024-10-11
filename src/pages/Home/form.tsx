@@ -1,10 +1,9 @@
-// App.js
 import { useState } from "react";
 import * as ethereum from "../../lib/ethereum";
 
-function Form() {
-  const [inputValue, setInputValue] = useState(""); // State to hold the input value
-  const [labelText, setLabelText] = useState(""); // State to hold the label text
+export default function Form() {
+  const [inputValue, setInputValue] = useState("");
+  const [labelText, setLabelText] = useState("");
 
   const handleButtonClick = async () => {
     const balance = await ethereum.getBalance(inputValue);
@@ -31,5 +30,3 @@ function Form() {
     </div>
   );
 }
-
-export default Form;
