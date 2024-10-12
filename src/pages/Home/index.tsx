@@ -1,27 +1,52 @@
 import preactLogo from "../../assets/tatum.jpeg";
 import Form from "./form";
-import { Box, Flex, Heading } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Box,
+  Flex,
+  Heading,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import WalletBalance from "./walletBalance";
 import * as ethereum from "../../lib/ethereum";
-import * as React from "react";
+import { ReactElement } from "react";
 import { Maybe } from "../../types/maybe";
 
 export function Home() {
   const [walletBalance, setWalletBalance] = useState<Maybe<string>>(null);
   const [isLoading, setIsLoading] = useState(false);
-  let walletBalanceComponent: Maybe<React.ReactElement>;
+  const [error, setError] = useState<Maybe<string>>(null);
+  let walletBalanceComponent: Maybe<ReactElement>;
+  let errorElement: Maybe<ReactElement>;
 
   const onFormSubmit = async (walletAddress) => {
     setWalletBalance(null);
     walletBalanceComponent = null;
     setIsLoading(true);
-    setWalletBalance(await ethereum.getBalance(walletAddress));
+    setError(null);
+
+    try {
+      setWalletBalance(await ethereum.getBalance(walletAddress));
+    } catch (e) {
+      setError(e?.message);
+    }
+
     setIsLoading(false);
   };
 
   if (walletBalance != null) {
     walletBalanceComponent = <WalletBalance balance={walletBalance} />;
+  }
+
+  if (error != null) {
+    errorElement = (
+      <Alert status="error" borderRadius="var(--chakra-radii-md)">
+        <AlertIcon />
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
   }
 
   return (
@@ -38,10 +63,11 @@ export function Home() {
       <Heading size="lg" color="gray.600">
         Tatum ETH Wallet Checker
       </Heading>
-      <Box w={{ base: "100%", md: "500px" }}>
+      <Flex w={{ base: "100%", md: "500px" }} direction="column" gap="1rem">
+        {errorElement}
         <Form onSubmit={onFormSubmit} isLoading={isLoading} />
         {walletBalanceComponent}
-      </Box>
+      </Flex>
     </Flex>
   );
 }
