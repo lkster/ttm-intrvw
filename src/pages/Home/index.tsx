@@ -37,7 +37,11 @@ export function Home() {
   };
 
   if (walletBalance != null) {
-    walletBalanceComponent = <WalletBalance balance={walletBalance} />;
+    walletBalanceComponent = (
+      <Box mt="1rem">
+        <WalletBalance balance={walletBalance} />
+      </Box>
+    );
   }
 
   if (error != null) {
