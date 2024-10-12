@@ -11,7 +11,12 @@ function isWalletAddresValid(address: string): boolean {
   return /^0x[0-9a-f]{40}$/.test(address);
 }
 
-export default function Form({ onSubmit }) {
+export interface IFormProps {
+  onSubmit: (address: string) => void;
+  isLoading?: boolean;
+}
+
+export default function Form({ onSubmit, isLoading }: IFormProps) {
   const [walletAddress, setWalletAddress] = useState("");
   const [isValid, setIsValid] = useState(true);
 
@@ -41,13 +46,21 @@ export default function Form({ onSubmit }) {
           placeholder="Enter ETH wallet address to get balance"
           value={walletAddress}
           onInput={onInputChange}
+          disabled={isLoading}
         ></Input>
         <FormErrorMessage>
           Wallet address should consist of "0x" prefix and 40 hexadecimal
           characters
         </FormErrorMessage>
       </FormControl>
-      <Button colorScheme="teal" size="lg" onClick={onFormSubmit} type="submit">
+      <Button
+        isLoading={isLoading}
+        loadingText="Checking balance"
+        colorScheme="teal"
+        size="lg"
+        onClick={onFormSubmit}
+        type="submit"
+      >
         Check balance
       </Button>
     </Flex>

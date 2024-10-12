@@ -9,12 +9,15 @@ import { Maybe } from "../../types/maybe";
 
 export function Home() {
   const [walletBalance, setWalletBalance] = useState<Maybe<string>>(null);
+  const [isLoading, setIsLoading] = useState(false);
   let walletBalanceComponent: Maybe<React.ReactElement>;
 
   const onFormSubmit = async (walletAddress) => {
     setWalletBalance(null);
     walletBalanceComponent = null;
+    setIsLoading(true);
     setWalletBalance(await ethereum.getBalance(walletAddress));
+    setIsLoading(false);
   };
 
   if (walletBalance != null) {
@@ -36,7 +39,7 @@ export function Home() {
         Tatum ETH Wallet Checker
       </Heading>
       <Box w={{ base: "100%", md: "500px" }}>
-        <Form onSubmit={onFormSubmit} />
+        <Form onSubmit={onFormSubmit} isLoading={isLoading} />
         {walletBalanceComponent}
       </Box>
     </Flex>
