@@ -1,32 +1,33 @@
 import { useState } from "react";
-import * as ethereum from "../../lib/ethereum";
+import { Button, Flex, FormControl, Input } from "@chakra-ui/react";
 
-export default function Form() {
-  const [inputValue, setInputValue] = useState("");
-  const [labelText, setLabelText] = useState("");
+export default function Form({ onSubmit }) {
+  const [walletAddress, setWalletAddress] = useState("");
 
-  const handleButtonClick = async () => {
-    const balance = await ethereum.getBalance(inputValue);
-    setLabelText(`Balance: ${balance}`);
+  const onFormSubmit = async (e: Event) => {
+    e.preventDefault();
+
+    onSubmit?.(walletAddress);
+  };
+
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWalletAddress(e.currentTarget.value);
   };
 
   return (
-    <div>
-      <p>
-        <input
+    <Flex direction="column" gap="1rem">
+      <FormControl>
+        <Input
           type="text"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          size="lg"
           placeholder="Enter ETH wallet address to get balance"
-          style={{ padding: "5px", width: "320px" }}
-        />
-      </p>
-      <button onClick={handleButtonClick} style={{ padding: "5px" }}>
-        Click Me
-      </button>
-      <p style={{ padding: "5px", fontSize: "16px", fontWeight: "bold" }}>
-        {labelText}
-      </p>
-    </div>
+          value={walletAddress}
+          onInput={onInputChange}
+        ></Input>
+      </FormControl>
+      <Button colorScheme="teal" size="lg" onClick={onFormSubmit} type="submit">
+        Check balance
+      </Button>
+    </Flex>
   );
 }

@@ -1,14 +1,17 @@
 import { render } from "preact";
 import { LocationProvider } from "preact-iso";
-import "./style.css";
+// import "./style.css";
 import AppRouter from "./router";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
     <LocationProvider>
-      <main>
-        <AppRouter />
-      </main>
+      <ChakraProvider>
+        <main>
+          <AppRouter />
+        </main>
+      </ChakraProvider>
     </LocationProvider>
   );
 }
