@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 
 function isWalletAddresValid(address: string): boolean {
-  return /^0x[0-9a-f]{40}$/.test(address);
+  return /^0x[0-9a-f]{40}$/i.test(address);
 }
 
 export interface IFormProps {
