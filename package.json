@@ -5,7 +5,8 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "husky"
+		"prepare": "husky",
+		"format": "prettier --write --ignore-unknown src/**/*"
 	},
 	"dependencies": {
 		"@chakra-ui/react": "^2.10.2",
