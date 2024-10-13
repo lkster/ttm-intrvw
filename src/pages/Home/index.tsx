@@ -61,7 +61,7 @@ export function Home() {
       alignItems="center"
       gap="1rem"
       p="1.5rem"
-      pt="10rem"
+      pt={{ base: "6rem", md: "10rem" }}
     >
       <Link href="https://tatum.io" target="_blank">
         <Image
@@ -71,7 +71,7 @@ export function Home() {
           aspectRatio="1/1"
         />
       </Link>
-      <Heading size="lg" color="gray.600">
+      <Heading size="lg" color="gray.600" textAlign="center">
         Tatum ETH Balance Checker
       </Heading>
       <Flex w={{ base: "100%", md: "500px" }} direction="column" gap="1rem">
