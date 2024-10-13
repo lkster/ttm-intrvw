@@ -1,4 +1,4 @@
-import preactLogo from "../../assets/tatum.jpeg";
+import tatumLogo from "../../assets/tatum.jpeg";
 import Form from "./form";
 import {
   Alert,
@@ -59,13 +59,13 @@ export function Home() {
       alignItems="center"
       gap="1rem"
       p="1.5rem"
-      mt="5rem"
+      pt="5rem"
     >
       <a href="https://preactjs.com" target="_blank">
-        <img src={preactLogo} alt="Preact logo" height="160" width="160" />
+        <img src={tatumLogo} alt="Preact logo" height="160" width="160" />
       </a>
       <Heading size="lg" color="gray.600">
-        Tatum ETH Wallet Checker
+        Tatum ETH Balance Checker
       </Heading>
       <Flex w={{ base: "100%", md: "500px" }} direction="column" gap="1rem">
         {errorElement}
@@ -73,14 +73,5 @@ export function Home() {
         {walletBalanceComponent}
       </Flex>
     </Flex>
-  );
-}
-
-function Resource(props) {
-  return (
-    <a href={props.href} target="_blank" class="resource">
-      <h2>{props.title}</h2>
-      <p>{props.description}</p>
-    </a>
   );
 }
