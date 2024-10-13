@@ -1,41 +1,84 @@
-import preactLogo from '../../assets/tatum.jpeg'
-import Form from './form';
-import './style.css';
+import tatumLogo from "../../assets/tatum.svg";
+import Form from "./form";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Link,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import WalletBalance from "./walletBalance";
+import * as ethereum from "../../lib/ethereum";
+import { ReactElement } from "react";
+import { Maybe } from "../../types/maybe";
 
 export function Home() {
-	return (
-		<div class="home">
-			<a href="https://preactjs.com" target="_blank">
-				<img src={preactLogo} alt="Preact logo" height="160" width="160" />
-			</a>
-			<h1>Tatum Hello</h1>
-			{/* <section>
-				<Resource
-					title="Learn Preact"
-					description="If you're new to Preact, try the interactive tutorial to learn important concepts"
-					href="https://preactjs.com/tutorial"
-				/>
-				<Resource
-					title="Differences to React"
-					description="If you're coming from React, you may want to check out our docs to see where Preact differs"
-					href="https://preactjs.com/guide/v10/differences-to-react"
-				/>
-				<Resource
-					title="Learn Vite"
-					description="To learn more about Vite and how you can customize it to fit your needs, take a look at their excellent documentation"
-					href="https://vitejs.dev"
-				/>
-			</section> */}
-			<Form />
-		</div>
-	);
-}
+  const [walletBalance, setWalletBalance] = useState<Maybe<string>>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Maybe<string>>(null);
+  let walletBalanceComponent: Maybe<ReactElement>;
+  let errorElement: Maybe<ReactElement>;
 
-function Resource(props) {
-	return (
-		<a href={props.href} target="_blank" class="resource">
-			<h2>{props.title}</h2>
-			<p>{props.description}</p>
-		</a>
-	);
+  const onFormSubmit = async (walletAddress) => {
+    setWalletBalance(null);
+    walletBalanceComponent = null;
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      setWalletBalance(await ethereum.getBalance(walletAddress));
+    } catch (e) {
+      setError(e?.message);
+    }
+
+    setIsLoading(false);
+  };
+
+  if (walletBalance != null) {
+    walletBalanceComponent = (
+      <Box mt="1rem">
+        <WalletBalance balance={walletBalance} />
+      </Box>
+    );
+  }
+
+  if (error != null) {
+    errorElement = (
+      <Alert status="error" borderRadius="var(--chakra-radii-md)">
+        <AlertIcon />
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
+  }
+
+  return (
+    <Flex
+      direction="column"
+      alignItems="center"
+      gap="1rem"
+      p="1.5rem"
+      pt={{ base: "6rem", md: "10rem" }}
+    >
+      <Link href="https://tatum.io" target="_blank">
+        <Image
+          src={tatumLogo}
+          alt="Tatum logo"
+          height="120"
+          aspectRatio="1/1"
+        />
+      </Link>
+      <Heading size="lg" color="gray.600" textAlign="center">
+        Tatum ETH Balance Checker
+      </Heading>
+      <Flex w={{ base: "100%", md: "500px" }} direction="column" gap="1rem">
+        {errorElement}
+        <Form onSubmit={onFormSubmit} isLoading={isLoading} />
+        {walletBalanceComponent}
+      </Flex>
+    </Flex>
+  );
 }

@@ -4,16 +4,26 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"prepare": "husky",
+		"format": "prettier --write --ignore-unknown src/**/*"
 	},
 	"dependencies": {
+		"@chakra-ui/react": "^2.10.2",
+		"@emotion/react": "^11.13.3",
+		"@emotion/styled": "^11.13.0",
 		"@tatumio/tatum": "^4.2.0",
+		"framer-motion": "^11.11.7",
 		"mongodb": "^3.0.0",
 		"preact": "^10.22.1",
-		"preact-iso": "^2.6.3"
+		"preact-iso": "^2.6.3",
+		"react-hook-form": "^7.53.0"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.9.0",
+		"husky": "^9.1.6",
+		"lint-staged": "^15.2.10",
+		"prettier": "^3.3.3",
 		"typescript": "^5.6.2",
 		"vite": "^5.3.3"
 	}

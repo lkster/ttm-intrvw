@@ -1,23 +1,20 @@
-import { render } from 'preact';
-import { LocationProvider, Router, Route } from 'preact-iso';
+import { render } from "preact";
+import { LocationProvider } from "preact-iso";
+import AppRouter from "./router";
+import { ChakraProvider } from "@chakra-ui/react";
+import ColorModeToggle from "./components/colorModeToggle";
 
-import { Header } from './components/Header.jsx';
-import { Home } from './pages/Home/index.jsx';
-import { NotFound } from './pages/_404.jsx';
-import './style.css';
-
-export function App() {
-	return (
-		<LocationProvider>
-			<Header />
-			<main>
-				<Router>
-					<Route path="/" component={Home} />
-					<Route default component={NotFound} />
-				</Router>
-			</main>
-		</LocationProvider>
-	);
+function App() {
+  return (
+    <LocationProvider>
+      <ChakraProvider>
+        <ColorModeToggle />
+        <main>
+          <AppRouter />
+        </main>
+      </ChakraProvider>
+    </LocationProvider>
+  );
 }
 
-render(<App />, document.getElementById('app'));
+render(<App />, document.getElementById("app"));
