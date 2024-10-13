@@ -1,4 +1,4 @@
-import tatumLogo from "../../assets/tatum.jpeg";
+import tatumLogo from "../../assets/tatum.svg";
 import Form from "./form";
 import {
   Alert,
@@ -7,6 +7,8 @@ import {
   Box,
   Flex,
   Heading,
+  Image,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import WalletBalance from "./walletBalance";
@@ -59,11 +61,16 @@ export function Home() {
       alignItems="center"
       gap="1rem"
       p="1.5rem"
-      pt="5rem"
+      pt="10rem"
     >
-      <a href="https://preactjs.com" target="_blank">
-        <img src={tatumLogo} alt="Preact logo" height="160" width="160" />
-      </a>
+      <Link href="https://tatum.io" target="_blank">
+        <Image
+          src={tatumLogo}
+          alt="Tatum logo"
+          height="120"
+          aspectRatio="1/1"
+        />
+      </Link>
       <Heading size="lg" color="gray.600">
         Tatum ETH Balance Checker
       </Heading>
