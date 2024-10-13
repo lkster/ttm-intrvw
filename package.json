@@ -15,7 +15,8 @@
 		"framer-motion": "^11.11.7",
 		"mongodb": "^3.0.0",
 		"preact": "^10.22.1",
-		"preact-iso": "^2.6.3"
+		"preact-iso": "^2.6.3",
+		"react-hook-form": "^7.53.0"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.9.0",

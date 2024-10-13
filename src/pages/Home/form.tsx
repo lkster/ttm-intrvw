@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { useState } from "react";
 import {
   Button,
@@ -6,6 +7,7 @@ import {
   FormErrorMessage,
   Input,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
 function isWalletAddresValid(address: string): boolean {
   return /^0x[0-9a-f]{40}$/i.test(address);
@@ -16,53 +18,47 @@ export interface IFormProps {
   isLoading?: boolean;
 }
 
-export default function Form({ onSubmit, isLoading }: IFormProps) {
-  const [walletAddress, setWalletAddress] = useState("");
-  const [isValid, setIsValid] = useState(true);
+export default function AForm({ onSubmit, isLoading }: IFormProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const onFormSubmit = async (e: Event) => {
-    e.preventDefault();
-
-    if (!isWalletAddresValid(walletAddress)) {
-      setIsValid(false);
-
-      return;
-    }
-
-    setIsValid(true);
+  const onFormSubmit = async ({ walletAddress }) => {
     onSubmit?.(walletAddress);
-  };
-
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWalletAddress(e.currentTarget.value);
   };
 
   return (
     <Flex direction="column" gap="1rem">
-      <FormControl isInvalid={!isValid}>
-        <Input
-          type="text"
+      <form onsubmit={handleSubmit(onFormSubmit)} css={{ display: "contents" }}>
+        <FormControl isInvalid={!!errors.walletAddress}>
+          <Input
+            type="text"
+            size="lg"
+            placeholder="Enter ETH wallet address to get balance"
+            {...register("walletAddress", {
+              disabled: isLoading,
+              pattern: {
+                value: /^0x[0-9a-f]{40}$/i,
+                message:
+                  'Wallet address should consist of "0x" prefix and 40 hexadecimal characters',
+              },
+              required: "You need to provide wallet address first",
+            })}
+          ></Input>
+          <FormErrorMessage>{errors.walletAddress?.message}</FormErrorMessage>
+        </FormControl>
+        <Button
+          isLoading={isLoading}
+          loadingText="Checking balance"
+          colorScheme="teal"
           size="lg"
-          placeholder="Enter ETH wallet address to get balance"
-          value={walletAddress}
-          onInput={onInputChange}
-          disabled={isLoading}
-        ></Input>
-        <FormErrorMessage>
-          Wallet address should consist of "0x" prefix and 40 hexadecimal
-          characters
-        </FormErrorMessage>
-      </FormControl>
-      <Button
-        isLoading={isLoading}
-        loadingText="Checking balance"
-        colorScheme="teal"
-        size="lg"
-        onClick={onFormSubmit}
-        type="submit"
-      >
-        Check balance
-      </Button>
+          type="submit"
+        >
+          Check balance
+        </Button>
+      </form>
     </Flex>
   );
 }
