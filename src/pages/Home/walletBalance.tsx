@@ -4,7 +4,7 @@ export default function WalletBalance({ balance }) {
   return (
     <Box textAlign="center">
       <Text color="gray.500">Wallet Balance:</Text>
-      <Text fontSize="1.875rem" fontWeight="600">
+      <Text fontSize={{ base: "2xl", md: "3xl" }} fontWeight="600">
         {balance} ETH
       </Text>
     </Box>

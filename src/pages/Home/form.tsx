@@ -38,10 +38,9 @@ export default function AForm({ onSubmit, isLoading }: IFormProps) {
     <Flex direction="column" gap="1rem">
       <form onsubmit={handleSubmit(onFormSubmit)} css={{ display: "contents" }}>
         <FormControl isInvalid={!!errors.walletAddress}>
-          <InputGroup size="lg">
+          <InputGroup size={{ base: "md", md: "lg" }}>
             <Input
               type="text"
-              size="lg"
               placeholder="Enter ETH wallet address to get balance"
               {...register("walletAddress", {
                 disabled: isLoading,
@@ -70,7 +69,7 @@ export default function AForm({ onSubmit, isLoading }: IFormProps) {
           isLoading={isLoading}
           loadingText="Checking balance"
           colorScheme="teal"
-          size="lg"
+          size={{ base: "md", md: "lg" }}
           type="submit"
         >
           Check balance

@@ -74,7 +74,11 @@ export function Home() {
       <Heading size="lg" color="gray.600" textAlign="center">
         Tatum ETH Balance Checker
       </Heading>
-      <Flex w={{ base: "100%", md: "500px" }} direction="column" gap="1rem">
+      <Flex
+        w={{ base: "100%", sm: "450px", md: "500px" }}
+        direction="column"
+        gap="1rem"
+      >
         {errorElement}
         <Form onSubmit={onFormSubmit} isLoading={isLoading} />
         {walletBalanceComponent}

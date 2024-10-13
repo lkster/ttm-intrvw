@@ -23,7 +23,7 @@ export default function FormHelpModal({
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>What is Ethereum Wallet Address?</ModalHeader>
+        <ModalHeader pr="2.5rem">What is Ethereum Wallet Address?</ModalHeader>
         <ModalCloseButton />
         <ModalBody lineHeight="1.8" textAlign="justify">
           Ethereum wallet address is your public unique identifier that refers
