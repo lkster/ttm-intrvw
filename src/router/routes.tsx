@@ -1,5 +1,5 @@
 import { AnyComponent } from "preact";
-import { Home } from "../pages/Home";
+import { Home } from "@/pages/Home";
 
 interface IRoute {
   path: string;
