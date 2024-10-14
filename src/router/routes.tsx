@@ -3,7 +3,7 @@ import { Home } from "@/pages/Home";
 
 interface IRoute {
   path: string;
-  component: AnyComponent;
+  component: AnyComponent<any>;
 }
 
 export const routes: IRoute[] = [

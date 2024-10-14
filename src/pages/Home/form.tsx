@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { useState } from "react";
 import {
   Button,
   Flex,
@@ -12,10 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import FormHelpModal from "./formHelpModal";
-
-function isWalletAddresValid(address: string): boolean {
-  return /^0x[0-9a-f]{40}$/i.test(address);
-}
 
 export interface IFormProps {
   onSubmit: (address: string) => void;
