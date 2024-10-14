@@ -6,8 +6,11 @@ This is a simple app for checking actual ETH wallet balance using Tatum SDK
 
 Recommended Node.js version is `20.18` (at least this one was used for development)
 
-At first, you need to install packages - just run `npm install`. After installing packages simply run `npm run dev` to 
-run the app. Now you're good to go.
+Steps to prepare and run project:
+1. run `npm install` to install all dependencies
+2. update `.env` file (or even better - add new `.env.local` file) with your Tatum api key
+3. run `npm run dev` script
+4. You're good to go
 
 If you want to build an app, simply run `npm run build` script. App will be built into `dist` directory.
 
