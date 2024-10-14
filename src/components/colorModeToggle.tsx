@@ -1,5 +1,5 @@
-import sunIcon from "../assets/sun.svg";
-import moonIcon from "../assets/moon.svg";
+import sunIcon from "@/assets/sun.svg";
+import moonIcon from "@/assets/moon.svg";
 import { Box, Button, Image, useColorMode } from "@chakra-ui/react";
 
 export default function ColorModeToggle() {

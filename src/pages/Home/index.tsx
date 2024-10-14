@@ -12,9 +12,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import WalletBalance from "./walletBalance";
-import * as ethereum from "../../lib/ethereum";
+import * as ethereum from "@/lib/ethereum";
 import { ReactElement } from "react";
-import { Maybe } from "../../types/maybe";
+import { Maybe } from "@/types/maybe";
 
 export function Home() {
   const [walletBalance, setWalletBalance] = useState<Maybe<string>>(null);

@@ -1,5 +1,5 @@
 import { Ethereum, Network, Status, TatumSDK } from "@tatumio/tatum";
-import { config } from "../config/config";
+import { config } from "@/config/config";
 
 const tatum = await TatumSDK.init<Ethereum>({
   network: Network.ETHEREUM,
